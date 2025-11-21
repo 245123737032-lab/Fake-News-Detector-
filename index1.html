@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Fake News Detection App</h1>
+        <p class="sub">Enter any news headline or article to check authenticity</p>
+
+        <textarea id="newsInput" placeholder="Type or paste news content here..."></textarea>
+
+        <button onclick="detectFakeNews()">Check News</button>
+
+        <div id="resultBox" class="result"></div>
+    </div>
+
+<script>
+    function detectFakeNews() {
+        let text = document.getElementById("newsInput").value.toLowerCase();
+        let result = document.getElementById("resultBox");
+
+        if (text.trim() === "") {
+            result.innerHTML = "⚠ Please enter some news text.";
+            result.style.color = "#ff9800";
+            return;
+        }
+
+        // Simple Fake Detection Logic (keyword-based)
+        let fakeKeywords = ["shocking", "viral", "breaking", "rumor", "exposed", "leaked", "fake"];
+        let isFake = fakeKeywords.some(word => text.includes(word));
+
+        if (isFake) {
+            result.innerHTML = "❌ This news seems FAKE!";
+            result.style.color = "#e53935";
+        } else {
+            result.innerHTML = "✔ This news seems REAL.";
+            result.style.color = "#4caf50";
+        }
+    }
+</script>
+
+</body>
+</html>
